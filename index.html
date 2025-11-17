@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Электронды кітапхана | Оқу платформасы</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://source.unsplash.com/random/1200x600/?library');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .section {
+            padding: 3rem 0;
+            background-color: white;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .book-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .book-cover {
+            height: 250px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .book-info {
+            padding: 1rem;
+        }
+        
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+        }
+        
+        .audio-studio {
+            background-color: var(--light-color);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .audio-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .audio-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .gamification {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--light-color);
+            padding: 1rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .tokens {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .token {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Электронды кітапхана</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Басты бет</a></li>
+                    <li><a href="#library">Кітапхана</a></li>
+                    <li><a href="#qr">QR-код</a></li>
+                    <li><a href="#audio">Аудио студия</a></li>
+                    <li><a href="#bookcrossing">Буккроссинг</a></li>
+                    <li><a href="#gamification">Геймификация</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Электронды кітапханаға қош келдіңіз!</h1>
+            <p>Біз сізге кітап оқу, тыңдау және алмасу үшін заманауи платформаны ұсынамыз</p>
+            <a href="#library" class="btn">Кітаптарды шолу</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="section" id="library">
+            <h2 class="section-title">Электронды кітаптар қоры</h2>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-cover">Кітап суреті</div>
+                    <div class="book-info">
+                        <h3>Абай жолы</h3>
+                        <p>Мұхтар Әуезов</p>
+                        <button class="btn" style="margin-top: 10px; width: 100%;">Оқу</button>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">Кітап суреті</div>
+                    <div class="book-info">
+                        <h3>Қызыл жебе</hh3>
+                        <p>Ілияс Есенберлин</p>
+                        <button class="btn" style="margin-top: 10px; width: 100%;">Оқу</button>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">Кітап суреті</div>
+                    <div class="book-info">
+                        <h3>Шыңғыс хан</h3>
+                        <p>Ілияс Есенберлин</p>
+                        <button class="btn" style="margin-top: 10px; width: 100%;">Оқу</button>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">Кітап суреті</div>
+                    <div class="book-info">
+                        <h3>Алтын орда</h3>
+                        <p>Ілияс Есенберлин</p>
+                        <button class="btn" style="margin-top: 10px; width: 100%;">Оқу</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="qr">
+            <h2 class="section-title">QR-код жүйесі</h2>
+            <div class="qr-section">
+                <p>Кітаптарды тез табу үшін QR-кодтарды пайдаланыңыз</p>
+                <div class="qr-code">
+                    <p>QR-код суреті</p>
+                </div>
+                <div class="qr-generator">
+                    <input type="text" placeholder="Кітап атауын енгізіңіз" style="padding: 10px; width: 300px; margin-right: 10px;">
+                    <button class="btn">QR-код жасау</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="audio">
+            <h2 class="section-title">Аудио жазу студиясы</h2>
+            <div class="audio-studio">
+                <p>Кітаптарды аудио нұсқада тыңдаңыз немесе өз дауысыңызбен жазыңыз</p>
+                <div class="audio-player">
+                    <h3>Қазіргі аудио: "Абай жолы" 1-тарау</h3>
+                    <div class="audio-controls">
+                        <button class="audio-btn">⏮</button>
+                        <button class="audio-btn">▶</button>
+                        <button class="audio-btn">⏸</button>
+                        <button class="audio-btn">⏭</button>
+                    </div>
+                </div>
+                <div class="audio-recorder" style="margin-top: 2rem;">
+                    <h3>Өз дауысыңызбен жазу</h3>
+                    <div class="audio-controls">
+                        <button class="audio-btn">●</button>
+                        <button class="audio-btn">■</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="bookcrossing">
+            <h2 class="section-title">Буккроссинг бұрышы</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Кітап алмасу</h3>
+                    <p>Өз кітаптарыңызды басқа оқырмандармен бөлісіңіз</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Кітаптар картасы</h3>
+                    <p>Қалаңыздағы буккроссинг нүктелерін табыңыз</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Оқу клубы</h3>
+                    <p>Кітаптар туралы пікір алмасыңыз</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="gamification">
+            <h2 class="section-title">Оқу процесін геймификациялау</h2>
+            <div class="gamification">
+                <div class="user-profile">
+                    <div class="avatar">СІЗ</div>
+                    <div class="user-info">
+                        <h3>Сіздің профиліңіз</h3>
+                        <p>Деңгей: 5 | Ұпай: 1250</p>
+                    </div>
+                </div>
+                <div class="tokens">
+                    <div class="token">Кітап оқушысы</div>
+                    <div class="token">Жылдам оқушы</div>
+                    <div class="token">Аудио тыңдаушы</div>
+                    <div class="token">Буккроссинг қатысушысы</div>
+                </div>
+                <div class="achievements">
+                    <h3>Жетістіктер</h3>
+                    <div class="tokens">
+                        <div class="token" style="background-color: var(--accent-color);">5 кітап оқу</div>
+                        <div class="token" style="background-color: var(--accent-color);">10 сағат тыңдау</div>
+                        <div class="token" style="background-color: var(--accent-color);">3 кітап алмасу</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 Электронды кітапхана. Барлық құқықтар қорғалған.</p>
+            <p>Бізбен байланысыңыз: info@kitaphana.kz</p>
+        </div>
+    </footer>
+
+    <script>
+        // Кітап оқу функциясы
+        document.querySelectorAll('.book-card .btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const bookTitle = this.closest('.book-card').querySelector('h3').textContent;
+                alert(`"${bookTitle}" кітабын оқу режиміне өту...`);
+            });
+        });
+        
+        // QR-код генераторы
+        document.querySelector('.qr-generator .btn').addEventListener('click', function() {
+            const bookName = document.querySelector('.qr-generator input').value;
+            if(bookName) {
+                alert(`"${bookName}" үшін QR-код жасалынуда...`);
+            } else {
+                alert('Кітап атауын енгізіңіз!');
+            }
+        });
+        
+        // Аудио басқару
+        document.querySelectorAll('.audio-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.textContent;
+                if(action === '▶') {
+                    alert('Аудио ойнату басталды...');
+                } else if(action === '⏸') {
+                    alert('Аудио тоқтатылды...');
+                } else if(action === '●') {
+                    alert('Аудио жазу басталды...');
+                } else if(action === '■') {
+                    alert('Аудио жазу тоқтатылды...');
+                }
+            });
+        });
+        
+        // Навигацияны тегістеу
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
